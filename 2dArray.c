@@ -15,7 +15,7 @@ void fillTable(int (*table)[3], int cases){
     for(j = 0; j < cases; j++){
 
         for(i = 0; i < 3; i++){
-            scanf("%d", table[cases] + i);
+            scanf("%d", *(table[cases] + i));
         }
     }
 }
@@ -28,14 +28,6 @@ int main(){
     int costTable[cases][3]; //The amount of lines is the number of cases, but there will be only 3 collums
 
     fillTable(costTable, cases);
-
-    int i, j;
-    for(j = 0; j < cases; j++){
-
-        for(i = 0; i < 3; i++){
-            printf("%d", costTable[j][i]);
-        }
-    }
 
     return 0;
 }
