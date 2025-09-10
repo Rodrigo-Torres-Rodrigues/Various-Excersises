@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdbool.h>
 
 int askCases(){
     int cases;
@@ -35,15 +34,43 @@ void showTable(int tab[][3], int cas){
     }
 }
 
-void calcTable(int tab[][3], int cas, int *mid[]){
-    int i, j, lin;
-    bool middle = false;
+void calcMiddle(int tab[][3], int cas, int *mid){
+    int i, j, high, middle, low;
 
-    for(lin = 0; lin < cas; lin++){
+    for(j = 0; j < cas; j++){
+        high = tab[j][0];
+        middle = tab[j][0];
+        low = tab[j][0];
 
-        for(i = 0; middle = false; i++){
+        for(i = 1; i < 3; i++){
+
+            if(tab[j][i] >= high){ //it needed the '='because it would break if the user puts two equal numbers.
+                high = tab[j][i];
+
+            }if(tab[j][i] <= low){
+                low = tab[j][i];
+
+            }else{
+                middle = tab[j][i]; //If the number isn't higher or lower, they are in the middle.
+
+            }
+
         }
+
+        mid[j] = middle;
     }
+}
+
+void showMid(int mid[], int cas){
+    int i;
+
+    printf("\n\nThe ones in the middle, according to the number of cases:\n");
+    for(i = 0; i < cas; i++){
+        printf("%d: %d |", i + 1, mid[i]);
+    }
+
+    printf("\n");
+
 }
 
 int main(){
@@ -59,6 +86,8 @@ int main(){
     int middles[cases]; //The middle terms
 
     calcMiddle(costTable, cases, middles);
+
+    showMid(middles, cases);
 
     return 0;
 }
